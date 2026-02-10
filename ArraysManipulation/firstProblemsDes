@@ -1,0 +1,6 @@
+1. Algorithms Dealing with a Single Array
+ Find the maximum value in an array.
+ Calculate the average of students in a class of n students for a given subject.
+(An element of the array is a structure with 2 fields: Name and Grade.)
+ Calculate the value of a polynomial P(X) of a given degree n using the array
+of its coefficients for a given value of X.
