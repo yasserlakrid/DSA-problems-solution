@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 // minimum of an array
 int minArray(int *p , int n ){
 int min = *p ;
@@ -20,23 +21,7 @@ int min = *p ;
     }
     return min;
 }
-// display the elements of an array
-void writeArray(int *p , int n ){
-    printf("[");
-for(int i = 0 ; i < n ; i++ ){
-printf(" , %d" , *(p + i));
-    }
-    printf("] \n");
-}
-// build a one dimension array
-void readArray(int *p , int n){
-printf("give the size of the array");
-    scanf("%d" , &n);
-      for(int i = 0 ; i< n ; i ++ ){
-        scanf("%d" , &p[i]);
-    }
-    
-}
+
 // calculate the students average
 int Average(){
     int n ;
@@ -103,11 +88,65 @@ for (int i = 0 ; i <= deg; i++){
 free(coef);
 return sum ;
 }
+
+
+
+
+// display the elements of an array
+void writeArray(int *p , int n ){
+    printf("[");
+for(int i = 0 ; i < n ; i++ ){
+printf(" , %d" , *(p + i));
+    }
+    printf("] \n");
+}
+// build a one dimension array
+void readArray(int *p , int *n){
+printf("give the size of the array");
+    scanf("%d" , n);
+      for(int i = 0 ; i< *n ; i ++ ){
+        scanf("%d" , &p[i]);
+    }
+}
+// retunr an array of squares elements 
+void buildsequareArray(int *p1 , int *p2 , int *p3, int tai1 , int tai2  , int *n3 )
+{
+     int j = 0 ;
+   int root = 0 ;
+    for (int i = 0 ; i < tai1 ; i ++){
+         root = (int)sqrt(p1[i]);
+
+if (root * root == p1[i]){
+        
+            p3[j] = p1[i] ;
+            j ++ ;
+    }
+}
+for (int i = 0 ; i < tai1 ; i ++){
+         root = (int)sqrt(p2[i]);
+
+        if (root * root == p2[i]){
+                    p3[j] = p2[i] ;
+                    j ++ ;
+            }
+}
+*n3 = j ;
+}
 int main (void){
-    int n = 3 ;
-    int p = 0 ;
-    printf("%d" , power(n,p));
-    printf("the value of polynomial is : %d" , poly());
+    int *p1 ;
+    int *p2 ;
+    int *p3 ;
+    int n1  ;
+    int n2  ;
+    int n3 ;
+    readArray(p1 , &n1);
+    writeArray(p1 , n1);
+    readArray(p2 , &n2);
+    writeArray(p2,n2);
+    buildsequareArray(p1 , p2 ,p3  ,n1 , n2 , &n3 );
+    printf("the square elements are : \n");
+    writeArray(p3,n3);
+
     getchar();
     getchar();
     return 0 ;
