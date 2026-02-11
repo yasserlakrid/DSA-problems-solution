@@ -134,7 +134,7 @@ for (int i = 0 ; i < tai1 ; i ++){
 }
 *n3 = j ;
 }
-// inteersection of two arrays
+// intersection of two arrays
 void intersaction(int *p1 , int *p2 , int *p3 , int n1 , int n2 , int *n3){
     int k = 0 ;
     bool found ;
@@ -145,11 +145,39 @@ for (int i = 0 ; i < n1 ; i++){
             p3[k] = p1[i] ;
             
             k++ ;
+            break;
         }
     }
 }
 *n3 = k ;
 }
+// union of two arrays 
+void unionOfarrays(int *p1 , int  *p2 , int *p3 ,int n1 , int n2 , int *n3 ){
+    bool found ;
+    int k = 0 ;
+    for(int i = 0 ; i< n1 ; i++){
+        
+        
+            p3[i] = p1[i] ;
+            
+        k = i ;
+    }
+k++ ;
+
+    for(int i = 0 ; i< n2 ; i++){
+        found = false;
+        for(int j = 0 ; j < n1 ; j++){
+        if (p2[i] == p3[j] ){found = true;}
+        }
+        if(!found){
+            
+            p3[k] = p2[i] ;
+            k++ ;
+        }
+    }
+     
+    *n3 = k ;
+};
 int main (void){
     int *p1 , *p2 , *p3 , n1 ,n2 ,n3 ;
 
@@ -157,7 +185,8 @@ int main (void){
 writeArray(p1,n1) ;
 readArray(p2 , &n2 ) ;
 writeArray(p2,n2);
-intersaction(p1,p2,p3,n1,n2,&n3);
+unionOfarrays(p1,p2,p3,n1,n2,&n3);
+printf("the union is : ");
 writeArray(p3,n3);
     
     getchar();
