@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-// minimum of an array
+#include <stdbool.h>
+// minimum of an arra
+
 int minArray(int *p , int n ){
 int min = *p ;
     for( int i = 1 ; i < n ; i ++){
@@ -132,21 +134,32 @@ for (int i = 0 ; i < tai1 ; i ++){
 }
 *n3 = j ;
 }
+// inteersection of two arrays
+void intersaction(int *p1 , int *p2 , int *p3 , int n1 , int n2 , int *n3){
+    int k = 0 ;
+    bool found ;
+for (int i = 0 ; i < n1 ; i++){
+    
+    for(int j = 0 ; j < n2 ; j++){
+        if((p1[i] == p2[j] ) &&( !found )){
+            p3[k] = p1[i] ;
+            
+            k++ ;
+        }
+    }
+}
+*n3 = k ;
+}
 int main (void){
-    int *p1 ;
-    int *p2 ;
-    int *p3 ;
-    int n1  ;
-    int n2  ;
-    int n3 ;
-    readArray(p1 , &n1);
-    writeArray(p1 , n1);
-    readArray(p2 , &n2);
-    writeArray(p2,n2);
-    buildsequareArray(p1 , p2 ,p3  ,n1 , n2 , &n3 );
-    printf("the square elements are : \n");
-    writeArray(p3,n3);
+    int *p1 , *p2 , *p3 , n1 ,n2 ,n3 ;
 
+    readArray(p1 , &n1 ) ;
+writeArray(p1,n1) ;
+readArray(p2 , &n2 ) ;
+writeArray(p2,n2);
+intersaction(p1,p2,p3,n1,n2,&n3);
+writeArray(p3,n3);
+    
     getchar();
     getchar();
     return 0 ;
