@@ -178,17 +178,29 @@ k++ ;
      
     *n3 = k ;
 };
-int main (void){
-    int *p1 , *p2 , *p3 , n1 ,n2 ,n3 ;
+void physicalDeletion(int *p1 , int *n1 ,  int pos , int el){
+for(int i = pos ; i < *n1 ; i++){
+        p1[i] = p1[i + el] ;  
+}
 
-    readArray(p1 , &n1 ) ;
+}
+int main (void){
+    int *p1  , n1  ;
+int pos , el;
+
+readArray(p1 , &n1 ) ;
 writeArray(p1,n1) ;
-readArray(p2 , &n2 ) ;
-writeArray(p2,n2);
-unionOfarrays(p1,p2,p3,n1,n2,&n3);
-printf("the union is : ");
-writeArray(p3,n3);
-    
+printf("give the position you wanna remove from : ");
+scanf("%d" , &pos);
+printf("give how many elements you want to remove : ");
+scanf("%d" , &el);
+
+printf("the new array is : \n");
+
+physicalDeletion(p1,&n1,pos,el);
+
+writeArray(p1,(n1 - el));
+
     getchar();
     getchar();
     return 0 ;
