@@ -98,7 +98,12 @@ return sum ;
 void writeArray(int *p , int n ){
     printf("[");
 for(int i = 0 ; i < n ; i++ ){
+    if(i != 0){
 printf(" , %d" , *(p + i));
+    }else{
+        printf(" %d" , *(p + i));
+    }
+
     }
     printf("] \n");
 }
@@ -178,6 +183,9 @@ k++ ;
      
     *n3 = k ;
 };
+
+
+
 void physicalDeletion(int *p1 , int *n1 ,  int pos , int el){
 for(int i = pos ; i < *n1 ; i++){
         p1[i] = p1[i + el] ;  
@@ -186,19 +194,23 @@ for(int i = pos ; i < *n1 ; i++){
 }
 int main (void){
     int *p1  , n1  ;
-int pos , el;
+int pos , el , val;
 
 readArray(p1 , &n1 ) ;
 writeArray(p1,n1) ;
-printf("give the position you wanna remove from : ");
-scanf("%d" , &pos);
+
+
+
+printf("give the value you want to remove : ");
+scanf("%d" , &val);
+
+for(pos = 0 ; pos <= n1 , p1[pos] != val ; pos++);
+
 printf("give how many elements you want to remove : ");
 scanf("%d" , &el);
 
-printf("the new array is : \n");
-
 physicalDeletion(p1,&n1,pos,el);
-
+printf("the new array is : \n");
 writeArray(p1,(n1 - el));
 
     getchar();
