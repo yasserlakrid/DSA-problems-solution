@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
-
+/**
+ 
 // Minimum of an array
 int minArray(int *p, int n) {
     int min = *p;
@@ -174,6 +175,8 @@ void physicalDeletion(int *p1, int *n1, int pos, int el) {
     *n1 -= el; // fix: update array size after deletion
 }
 // read an array 
+
+ */
 int* Array(int *n){
     printf("give the length of your array sir : ");
     scanf("%d" , n);
@@ -196,11 +199,29 @@ void writeArray(int *p , int n){
     }
     printf("]");
 }
+//insert a value based on an index 
+void insert(int *p , int *size  , int position , int inserted){
+    p = realloc(p , sizeof(int) * (*size + 1) );
+    
+    for(int i = *size ; i > position  ; i--){
 
+        p[i] = p[i - 1];
+
+    }
+   
+    *size = *size + 1 ;
+    p[position ] = inserted;
+}
 int main(void) {
     int *p ;
-    int n ;
+    int n , i , po;
     p = Array(&n); 
+    writeArray(p,n);
+    printf("what value do you want to insert : ");
+    scanf("%d" , &i);
+    printf("at which position ? ");
+    scanf("%d", &po);
+    insert(p,&n,po, i );
     writeArray(p,n);
     free(p);
     printf("\n");
