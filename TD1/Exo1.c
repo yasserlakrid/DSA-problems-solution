@@ -30,7 +30,10 @@ int displayLinkedlist(cell * head){
     int i = 1;
     while(address){
         printf("the %d value is : ",i);
+        
         printf("%d \n" ,address->val);
+        
+
         i ++ ;
         address= next(address);
     }
