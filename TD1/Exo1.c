@@ -29,11 +29,8 @@ int displayLinkedlist(cell * head){
     cell * address = head;
     int i = 1;
     while(address){
-        printf("the %d value is : ",i);
-        
+        printf("the %d value is : ",i);    
         printf("%d \n" ,address->val);
-        
-
         i ++ ;
         address= next(address);
     }
