@@ -135,16 +135,66 @@ void insertByPosition(cell * *head , cell *element , int position){
    
 
 }
+cell *mergeLinkedlists(cell *head1, cell *head2)
+{
+    cell *i = head1;
+    cell *j = head2;
+    cell *savI = i;
+    cell *savJ = j;
+
+    while (i && j)
+    {
+        if (j->val >= i->val)
+        {
+            while ( i && j && j->val >= i->val)
+            {
+                savI = i;
+                i = next(i);
+            }
+            assignaddr(savI, j);
+           
+        }
+        else
+        {
+            while ( i && j && j->val <= i->val)
+            {
+                savJ = j;
+                j = next(j);
+            }
+            assignaddr(savJ, i);
+            
+
+        }
+
+    }
+   if(i){
+    assignaddr(savJ,i);
+   }else if (j){
+    assignaddr(savI,j);
+   }
+   
+    if (head1->val > head2->val)
+    {
+        return head2;
+    }
+    else
+    {
+        return head1;
+    }
+}
 int main(){
-    int n ;
-    cell element;
-    printf("give the value number of items in the list : ");
+    int n ,n2;
+    
+    printf("give the value number of items in the first list : ");
     scanf("%d ",&n);
+     
     cell link = buildLinkedList(n);
+    printf("give the value number of items in the second list : ");
+    scanf("%d ",&n2);
+    cell link2 = buildLinkedList(n2);
     displayLinkedlist(link.addr);
-    allocate(&element.addr);
-    assignVal(&element,4);
-    insertByPosition(&link.addr,&element,3);
-    displayLinkedlist(link.addr);
+    displayLinkedlist(link2.addr);
+    cell * link3 = mergeLinkedlists(link.addr, link2.addr );
+    displayLinkedlist(link3);
     return 0;
 }
