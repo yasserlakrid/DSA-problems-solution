@@ -25,22 +25,90 @@ cell buildLinkedList (int n){
     return head;
 
 }
-int displayLinkedlist(cell * head){
+
+void displayLinkedlist(cell * head){
     cell * address = head;
-    int i = 1;
+    int i = 1 ;
     while(address){
-        printf("the %d value is : ",i);    
+        printf("the %d value is : ", i);    
         printf("%d \n" ,address->val);
         i ++ ;
         address= next(address);
     }
-    return i -1 ;
+   
 }
 
-int  main(){
-    cell link = buildLinkedList(3); // build a linked list and return the the first cell (address and undefind value)
-    int length = displayLinkedlist(link.addr); // display a linked list and return it's length 
-    printf("the length of the linked list is : %d \n",length);
-    return 1;
+cell * mostOccurrences(cell * head ){
+   int count = 0 ;
+   cell * head2 = head;
+   int maxCount =  0 ;
+   cell * base = head ;
+   cell * maxElement = head; 
+   while(head){
+    count = 0 ;
+    while(head2){
+       
+        if(head->val == head2->val){
+            count ++ ;
+        }
+        head2 = next(head2);
+    }
+    if(count > maxCount){
+        maxElement = head;
+        maxCount = count;
+    }
+    head = next(head);
+    head2 = base ;
+   }
+    return maxElement;
+}
 
+cell * accessByValue (cell * head , int value ){
+while(head){
+    if(head->val == value){
+        return head ;
+    }
+    head = next(head) ;
+}
+}
+cell * accessByPosition(cell * head , int position){
+    int i = 1 ; 
+    while(i<position && head){
+        i++ ;
+        head = next(head);
+    }
+    return head;
+}
+
+int listLength(cell * head){
+    int i = 0;
+    while(head){
+        i++;
+        head = next(head);
+    }
+    return i;
+}
+void deleteByValue(cell * *head , int value){
+    cell * save = *head;
+    cell * pre = *head;
+    if((*head)->val==value){
+       * head  = next(*head);
+    }
+
+    while(save && save->val != value){
+        pre = save ;
+        save = next(save);
+    }
+    assignaddr(pre , next(save));
+}
+int main(){
+    int n ;
+    printf("give the value number of items in the list : ");
+    scanf("%d ",&n);
+    cell link = buildLinkedList(n);
+    displayLinkedlist(link.addr);
+
+    deleteByValue(&link.addr , 5);
+    displayLinkedlist(link.addr);
+    return 0;
 }
