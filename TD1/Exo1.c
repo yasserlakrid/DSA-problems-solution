@@ -23,7 +23,6 @@ cell buildLinkedList (int n){
         assignaddr(previous,p); 
     } 
     return head;
-
 }
 
 void displayLinkedlist(cell * head){
@@ -101,14 +100,51 @@ void deleteByValue(cell * *head , int value){
     }
     assignaddr(pre , next(save));
 }
+void deleteByPosition(cell ** head , int position ){
+    cell * save = *head ;
+    cell * pre = *head;
+    if(position == 1){
+        *head = next(*head);
+    }
+    else{
+        int i =  1 ;
+    while(i < position && save){
+        pre = save;
+        i++;
+       save = next(save);
+    }
+    assignaddr(pre,next(save));
+
+    }
+    
+}
+void insertByPosition(cell * *head , cell *element , int position){
+    int i = 0 ;
+    if(position ==1){
+        assignaddr(element,*head);
+        *head = element;
+        return;
+    }
+    cell * pre = *head;
+    while(i < position  && pre){
+        pre = next(pre);
+        i ++ ;
+    }   
+    assignaddr(element ,next(pre));
+   assignaddr(pre,element);
+   
+
+}
 int main(){
     int n ;
+    cell element;
     printf("give the value number of items in the list : ");
     scanf("%d ",&n);
     cell link = buildLinkedList(n);
     displayLinkedlist(link.addr);
-
-    deleteByValue(&link.addr , 5);
+    allocate(&element.addr);
+    assignVal(&element,4);
+    insertByPosition(&link.addr,&element,3);
     displayLinkedlist(link.addr);
     return 0;
 }
