@@ -182,9 +182,22 @@ cell *mergeLinkedlists(cell *head1, cell *head2)
         return head1;
     }
 }
-void splitList(){
-    
+void splitLinkedList(cell * head , cell * head1 , cell *head2 ){
+    while(head){
+        if(head->val % 2 == 0){
+            head1->addr = head;
+            head1 = head ;
+        }else{
+            head2->addr = head;
+            head2 = head ;
+        }
+        
+        head = next(head);
+    }
+    head1->addr = 0;
+        head2->addr = 0;
 }
+
 int main(){
     int n ,n2;
     
@@ -192,12 +205,15 @@ int main(){
     scanf("%d ",&n);
      
     cell link = buildLinkedList(n);
-    printf("give the value number of items in the second list : ");
-    scanf("%d ",&n2);
-    cell link2 = buildLinkedList(n2);
+    cell *link1 ;
+    cell *  link2 ; 
+    allocate(&link1);
+    allocate(&link2);
     displayLinkedlist(link.addr);
-    displayLinkedlist(link2.addr);
-    cell * link3 = mergeLinkedlists(link.addr, link2.addr );
-    displayLinkedlist(link3);
+    splitLinkedList(link.addr,link1,link2);
+    printf("the first list is : ");
+    displayLinkedlist(link1->addr);
+    printf("the second list is : ");
+    displayLinkedlist(link2->addr);
     return 0;
 }
