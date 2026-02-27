@@ -182,6 +182,9 @@ cell *mergeLinkedlists(cell *head1, cell *head2)
         return head1;
     }
 }
+void splitList(){
+    
+}
 int main(){
     int n ,n2;
     
