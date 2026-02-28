@@ -197,7 +197,31 @@ void splitLinkedList(cell * head , cell * head1 , cell *head2 ){
     head1->addr = 0;
         head2->addr = 0;
 }
-
+void bubbleSort(cell * head){
+    int unordered = 1 ;
+    int save ;
+    cell * index = head;
+    if(!head || !head->addr){
+        return;
+    }else{
+        while(unordered){
+        unordered = 0 ;
+        index = head;
+        while(index->addr){
+            
+            if(index->val > next(index)->val){
+                save = index->val;
+                index->val = next(index)->val;
+                next(index)->val = save;
+                unordered = 1;
+            }
+            index = next(index);
+        }
+        
+    }
+    } 
+    
+}
 int main(){
     int n ,n2;
     
@@ -205,15 +229,8 @@ int main(){
     scanf("%d ",&n);
      
     cell link = buildLinkedList(n);
-    cell *link1 ;
-    cell *  link2 ; 
-    allocate(&link1);
-    allocate(&link2);
     displayLinkedlist(link.addr);
-    splitLinkedList(link.addr,link1,link2);
-    printf("the first list is : ");
-    displayLinkedlist(link1->addr);
-    printf("the second list is : ");
-    displayLinkedlist(link2->addr);
+    bubbleSort(link.addr);
+    displayLinkedlist(link.addr);
     return 0;
 }
