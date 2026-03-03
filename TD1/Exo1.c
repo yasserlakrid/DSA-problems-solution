@@ -222,15 +222,129 @@ void bubbleSort(cell * head){
     } 
     
 }
-int main(){
-    int n ,n2;
+
+int *buildArray(int length){
+    int * array;
+    array = malloc(sizeof(int)*length);
+
+    for(int i = 0 ; i < length ; i ++){
+        scanf("%d",&array[i]);
+    }
     
-    printf("give the value number of items in the first list : ");
-    scanf("%d ",&n);
-     
-    cell link = buildLinkedList(n);
-    displayLinkedlist(link.addr);
-    bubbleSort(link.addr);
-    displayLinkedlist(link.addr);
+    return array;
+}
+#include <stdlib.h>
+
+int* merge(int* array1, int length1, int* array2, int length2) {
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    // Allocate memory for the merged array
+    int* array3 = (int*)malloc((length1 + length2) * sizeof(int));
+    if (array3 == NULL) {
+        return NULL; // allocation failed
+    }
+
+    // Merge while both arrays still have elements
+    while (i < length1 && j < length2) {
+        if (array1[i] < array2[j]) {
+            array3[k++] = array1[i++];
+        } else {
+            array3[k++] = array2[j++];
+        }
+    }
+
+    // Copy remaining elements from array1
+    while (i < length1) {
+        array3[k++] = array1[i++];
+    }
+
+    // Copy remaining elements from array2
+    while (j < length2) {
+        array3[k++] = array2[j++];
+    }
+
+    return array3;
+}
+
+int *mergeSort( int * array , int  length){
+    int *array1 , *array2;
+    int *merged;
+    if(length < 2){
+        return array;
+    }else{
+        int mid = length / 2 ;
+        array1 = malloc(sizeof(int) * mid);
+        array2 = malloc(sizeof(int )* (length - mid ));
+        for(int i = 0 ; i < mid ; i ++){
+            array1[i] = array[i];
+            
+        }
+        for(int i = mid ; i < length ; i++){
+            array2[i - mid] = array[i];
+        }
+        array1 = mergeSort(array1 , mid);
+        array2 = mergeSort(array2,length - mid );
+         merged = merge(array1,mid,array2,(length - mid));
+         return merged;
+    }
+    
+}
+cell * buildPolynomial(int deg){
+    int i = 0 ; 
+    cell * head;
+    cell * p;
+    head = malloc(sizeof(cell));
+    p = head;
+    while(i <= deg){
+        printf("give the %d coefficient : " , i);
+        scanf("%d" , &(p->val));
+        i++;
+        p->addr = malloc(sizeof(cell));
+        p = next(p);
+    }
+    return head;
+}
+
+int power(int x , int p){
+    int sav = x ;
+    if(p == 0 ){
+        return 1 ;
+    }
+    for(int i = 1 ; i < p ; i++ ){
+        x = sav * x;
+    }
+    return x ;
+}
+int calculatePolynomialValue(cell * pol , int x){
+    int res = 0 ;
+    int i = 0 ;
+    int coef ;
+    int current ;
+    while(pol){
+        coef = pol->val ;
+        
+        
+        current = coef * power(x,i);
+        res =res +  current;
+      
+        pol = next(pol);
+        i++;
+    }
+    return res;
+}
+
+int main(){
+    cell* pol ;
+    int degree;
+    int X;
+    printf("give the degree of your polynomial : ");
+    scanf("%d",&degree);
+    pol = buildPolynomial(degree);
+   
+    printf("give the X you want to calculate the polynomial value on : ");
+    scanf("%d", &X);
+    printf("the value is : %d \n ", calculatePolynomialValue(pol,X));
     return 0;
 }
