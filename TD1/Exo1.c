@@ -71,14 +71,13 @@ while(head){
 }
 }
 cell * accessByPosition(cell * head , int position){
-    int i = 1 ; 
-    while(i<position && head){
-        i++ ;
+    int i = 0 ;
+    while(i < position && head){
         head = next(head);
+        i++;
     }
     return head;
 }
-
 int listLength(cell * head){
     int i = 0;
     while(head){
@@ -385,6 +384,42 @@ cell * polynomialSum(cell * pol1 , cell *pol2){
     return head;
 }
 
+cell * polynomialProduct(cell * pol1 , int degree1 , cell * pol2 , int degree2){
+    int deg1 = 0  ;
+    int deg2 = 0 ; 
+    int totaldegree = 0 ;
+    cell *product = malloc(sizeof(cell));
+    cell *sav = product;
+    cell *sav2 = pol2;
+    for(int i = 0 ; i <= degree1 + degree2 ; i++){
+        product->addr = malloc(sizeof(cell));
+        product->val = 0 ;
+        product = next(product);
+    }
+    product = sav;
+
+     while(pol1->addr){
+        totaldegree = 0 ;
+        deg2 = 0 ;
+        pol2 = sav2;
+        while(pol2->addr){
+            
+            accessByPosition(product,deg1 + deg2)->val += pol1->val * pol2->val;
+            deg2++;
+            pol2 = next(pol2);
+           
+        }
+
+        deg1++;
+        pol1 = next(pol1);
+    }
+
+   
+    
+
+    return product;
+}
+
 int main(){
     cell* pol ;
     cell *pol2 ;
@@ -395,11 +430,12 @@ int main(){
     scanf("%d",&degree);
     pol = buildPolynomial(degree);
     displayPolynomial(pol);
+   
     printf("give the degree of the second polynomial : ");
     scanf("%d",&degree2);
     pol2 = buildPolynomial(degree2);
     displayPolynomial(pol2);
-    sum = polynomialSum(pol,pol2);
+    sum = polynomialProduct(pol,degree,pol2,degree2);
     displayPolynomial(sum);
 
     
