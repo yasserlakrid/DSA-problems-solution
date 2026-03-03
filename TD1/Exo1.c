@@ -291,21 +291,7 @@ int *mergeSort( int * array , int  length){
     }
     
 }
-cell * buildPolynomial(int deg){
-    int i = 0 ; 
-    cell * head;
-    cell * p;
-    head = malloc(sizeof(cell));
-    p = head;
-    while(i <= deg){
-        printf("give the %d coefficient : " , i);
-        scanf("%d" , &(p->val));
-        i++;
-        p->addr = malloc(sizeof(cell));
-        p = next(p);
-    }
-    return head;
-}
+
 
 int power(int x , int p){
     int sav = x ;
@@ -334,17 +320,88 @@ int calculatePolynomialValue(cell * pol , int x){
     }
     return res;
 }
+void displayPolynomial(cell * p ){
+ int i = 1 ;
+ printf("%d ", p->val);
+
+ p = p->addr;
+ while (p->addr)
+ {
+    printf(  " + %d X ^ %d  " , p->val , i);
+    i++ ;
+    p = next(p);
+ }
+ printf("\n");
+}
+void derivate(cell ** pol){
+    int i = 0 ;
+    cell * sav = * pol ;
+    while(sav){
+        sav->val = sav->val * i;
+        sav = next(sav);
+        i ++ ;
+    }
+    *pol = (*pol)->addr;
+
+}
+cell * buildPolynomial(int deg){
+    int i = 0 ; 
+    cell * head;
+    cell * p;
+    head = malloc(sizeof(cell));
+    p = head;
+    while(i <= deg){
+        printf("give the %d coefficient : " , i);
+        scanf("%d" , &(p->val));
+        i++;
+        p->addr = malloc(sizeof(cell));
+        p = next(p);
+    }
+    return head;
+}
+
+cell * polynomialSum(cell * pol1 , cell *pol2){
+    cell * head ;
+    head = malloc(sizeof(cell));
+    cell * sav = head;
+    while(pol1->addr || pol2->addr){     
+        int v1  = (pol1->val) ? pol1->val : 0;
+        int v2  = (pol2->val) ? pol2->val : 0;
+        sav->val = v1+ v2;
+
+        if(pol1->addr){
+            pol1 = pol1->addr;
+        }
+        if(pol2->addr){
+            pol2 = pol2->addr;
+        }
+
+        sav->addr = malloc(sizeof(cell));
+        sav = next(sav);
+
+    }
+    
+    sav->addr = NULL;
+    return head;
+}
 
 int main(){
     cell* pol ;
-    int degree;
+    cell *pol2 ;
+    cell *sum;
+    int degree , degree2;
     int X;
     printf("give the degree of your polynomial : ");
     scanf("%d",&degree);
     pol = buildPolynomial(degree);
-   
-    printf("give the X you want to calculate the polynomial value on : ");
-    scanf("%d", &X);
-    printf("the value is : %d \n ", calculatePolynomialValue(pol,X));
+    displayPolynomial(pol);
+    printf("give the degree of the second polynomial : ");
+    scanf("%d",&degree2);
+    pol2 = buildPolynomial(degree2);
+    displayPolynomial(pol2);
+    sum = polynomialSum(pol,pol2);
+    displayPolynomial(sum);
+
+    
     return 0;
 }
