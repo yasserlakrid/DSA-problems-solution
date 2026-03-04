@@ -68,3 +68,48 @@ void traverseDoubly(dlist list){
     
     
 }
+int insertElementDoublyList( dlist *list , int pos ){
+    dcell *element ;
+    dcell *next ;
+    element = malloc(sizeof(dcell));
+
+    
+    dcell * head = list->head->next ; 
+    int i = 0 ;
+    while( head->next && i < pos){
+        head = head->next;
+        i ++ ;
+    }
+    if(i < pos){
+        printf("the position doesn't exist \n");
+        return 0 ;
+    }else{
+    printf("give the element value :");
+
+    scanf("%d",&element->val);
+
+    head = head->prev ;
+
+    if(head->next && head->prev){
+    next = head->next;
+    head->next = element;
+    next->prev = element;
+    element->next = next ;
+    element->prev = head;
+    }else if((!head->next) && (i == pos)){
+        
+        head->next = element ;
+        element->prev = head;
+        element->next = NULL;
+    }else if (!head->prev && head->next){
+        head->prev = element ;
+        element->next = head ;
+        list->head = element ;
+    }
+    }
+    
+    
+    return 1 ;
+
+   
+}
