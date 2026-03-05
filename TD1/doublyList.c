@@ -113,3 +113,16 @@ int insertElementDoublyList( dlist *list , int pos ){
 
    
 }
+void deleteElement(dlist list , int val){
+    dcell *head = list.head->next;
+    dcell *save ;
+    
+    while(head->next && head->val != val){
+        head = head->next;
+    }
+    
+    save = head->prev;
+    save->next = head->next;
+    head->prev = save;
+    free(head);
+}

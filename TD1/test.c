@@ -11,14 +11,13 @@ int main(){
     scanf("%d",&n);
     list = buildDoublyLinkedList(n);
     displayLinkedList(list);
-    printf("give the position you want to insert your element in : ");
+    printf("give the element you want to remove : ");
     scanf("%d" , &pos);
 
-    if(insertElementDoublyList( &list , pos )){
-        displayLinkedList(list);
-    }else{
-        printf("fuck you !\n");
-    }
+    
+         deleteElement(list,pos);
+         displayLinkedList(list);
+   
     
     return 1;
 }

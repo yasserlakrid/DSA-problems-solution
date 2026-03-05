@@ -16,4 +16,5 @@ dlist buildDoublyLinkedList(int length);
 void displayLinkedList(dlist  list);
 void traverseDoubly(dlist list);
 int insertElementDoublyList( dlist *list , int pos );
+void deleteElement(dlist list , int val);
 #endif
