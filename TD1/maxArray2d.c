@@ -45,6 +45,7 @@ int maxMat(int ** mat,int row,int col) {
     }
     return maxRow;
 }
+
 int main (){
     buildMat(&mat,&row,&col);
     writeMat(mat, &row,&col);

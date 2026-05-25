@@ -3,7 +3,7 @@
 typedef struct cell  {
     int val ;
     struct cell * addr  ;
-} cell;
+} cell; 
 
 void allocate(cell* *p);
 
